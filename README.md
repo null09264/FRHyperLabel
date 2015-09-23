@@ -32,3 +32,50 @@ void(^handler)(FRHyperLabel *label, NSString *substring) = ^(FRHyperLabel *label
 //Step 3: Add link substrings
 [label setLinksForSubstrings:@[@"Lorem", @"Pellentesque", @"blandit", @"Maecenas"] withLinkHandler:handler];
 ```
+
+#### APIs
+
+```objc
+@property (nonatomic) NSDictionary *linkAttributeDefault;
+@property (nonatomic) NSDictionary *linkAttributeHighlight;
+```
+
+These two dictionaries specify the default attributes for different states of a link.
+
+------------------------
+
+```objc
+- (void)setLinkForRange:(NSRange)range withAttributes:(NSDictionary *)attributes andLinkHandler:(void (^)(FRHyperLabel *label, NSRange selectedRange))handler;
+```
+
+add a link by giving the range of the link substring, the desired attribute for normal state and a selection handler.
+
+------------------------
+```objc
+- (void)setLinkForRange:(NSRange)range withLinkHandler:(void(^)(FRHyperLabel *label, NSRange selectedRange))handler;
+```
+Same as `setLinkForRange:withAttributes:andLinkHandler:`, expect this will feed the attribute parameter with 
+`linkAttributeDefault`
+
+------------------------
+
+```objc
+- (void)setLinkForSubstring:(NSString *)substring withAttribute:(NSDictionary *)attribute andLinkHandler:(void(^)(FRHyperLabel *label, NSString *substring))handler;
+```
+Add a link by giving the link substring, the desired attribute for normal state and a selection handler. This will only add links for the first appearance of the substring. If you need add links for others, please use `setLinkForRange:withAttributes:andLinkHandler:`.
+
+------------------------
+
+```objc
+- (void)setLinkForSubstring:(NSString *)substring withLinkHandler:(void(^)(FRHyperLabel *label, NSString *substring))handler;
+```
+Same as `setLinkForSubstring:withAttributes:andLinkHandler:`, expect this will feed the attribute parameter with 
+`linkAttributeDefault`
+
+------------------------
+
+```objc
+- (void)setLinksForSubstrings:(NSArray *)substrings withLinkHandler:(void(^)(FRHyperLabel *label, NSString *substring))handler;
+```
+
+Add am array of links by giving an array of substrings. The selection handler has to the same for all links in the array, only first appreance will be take care.
