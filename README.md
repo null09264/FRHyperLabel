@@ -7,7 +7,7 @@ FRHyperLabel is a subclass of UILabel, which powers you the capablilty to add on
 
 
 #### Usage
-The code to define a bunch of hyperlinks can be as short as one statement, just use the API: `setLinkForRange:withLinkHandler`, which takes in an substring range and a tap handler as input and setup the links with an element touch feedback.
+The code to define a bunch of hyperlinks can be as short as one statement, just use the API: `setLinkForSubstring:withLinkHandler:`, which takes in an substring and a tap handler as input and setup the links with an element touch feedback.
 
 ##### Example:
 ```objc
