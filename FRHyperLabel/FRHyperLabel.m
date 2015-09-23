@@ -20,56 +20,93 @@
 @implementation FRHyperLabel
 
 static CGFloat highLightAnimationTime = 0.15;
+static UIColor *FRHyperLabelLinkColorDefault;
+static UIColor *FRHyperLabelLinkColorHighlight;
 
-- (instancetype)init {
-	self = [super init];
-	if (self) {
-		[self setup];
++ (void)initialize {
+	if (self == [FRHyperLabel class]) {
+		FRHyperLabelLinkColorDefault = [UIColor colorWithRed:28/255.0 green:135/255.0 blue:199/255.0 alpha:1];
+		FRHyperLabelLinkColorHighlight = [UIColor colorWithRed:242/255.0 green:183/255.0 blue:73/255.0 alpha:1];
 	}
-	return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
-		[self setup];
+		[self checkInitialization];
 	}
 	return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
+- (instancetype)initWithCoder:(NSCoder *)coder {
 	self = [super initWithCoder:coder];
 	if (self) {
-		[self setup];
+		[self checkInitialization];
 	}
 	return self;
 }
 
-- (void)setAttributedText:(NSAttributedString *)attributedText {
-	[super setAttributedText:attributedText];
+- (void)checkInitialization {
+	if (!self.handlerDictionary) {
+		self.handlerDictionary = [NSMutableDictionary new];
+	}
+	
+	if (!self.userInteractionEnabled) {
+		self.userInteractionEnabled = YES;
+	}
+	
+	if (!self.linkAttributeDefault) {
+		self.linkAttributeDefault = @{NSForegroundColorAttributeName: FRHyperLabelLinkColorDefault,
+									  NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+	}
+	
+	if (!self.linkAttributeHighlight) {
+		self.linkAttributeHighlight = @{NSForegroundColorAttributeName: FRHyperLabelLinkColorHighlight,
+										NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+	}
 }
 
-- (void)setup {
-	self.defaultLinkAttribute = @{NSForegroundColorAttributeName: [UIColor colorWithRed:78/255.0 green:107/255.0 blue:166/255.0 alpha:1],
-								  NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-	self.highlightLinkAttribute = @{NSForegroundColorAttributeName: [UIColor colorWithRed:242/255.0 green:183/255.0 blue:73/255.0 alpha:1],
-									NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-	self.handlerDictionary = [NSMutableDictionary new];
-	self.userInteractionEnabled = YES;
-}
+#pragma mark - APIs
 
-- (void)setLinkForRange:(NSRange)range withAttributes:(NSDictionary *)attributes andLinkHandler:(void (^)(void))handler {
+//designated setter
+- (void)setLinkForRange:(NSRange)range withAttributes:(NSDictionary *)attributes andLinkHandler:(void (^)(FRHyperLabel *label, NSRange selectedRange))handler {
 	NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc]initWithAttributedString:self.attributedText];
-	[mutableAttributedString addAttributes:attributes range:range];
-	[self.handlerDictionary setObject:handler forKey:[NSValue valueWithRange:range]];
+	
+	if (attributes) {
+		[mutableAttributedString addAttributes:attributes range:range];
+	}
+	
+	if (handler) {
+		[self.handlerDictionary setObject:handler forKey:[NSValue valueWithRange:range]];
+	}
+	
 	self.attributedText = mutableAttributedString;
 }
 
-- (void)setLinkForRange:(NSRange)range withLinkHandler:(void(^)(void))handler {
-	[self setLinkForRange:range withAttributes:self.defaultLinkAttribute andLinkHandler:handler];
+- (void)setLinkForRange:(NSRange)range withLinkHandler:(void(^)(FRHyperLabel *label, NSRange selectedRange))handler {
+	[self setLinkForRange:range withAttributes:self.linkAttributeDefault andLinkHandler:handler];
 }
+
+- (void)setLinkForSubstring:(NSString *)substring withAttribute:(NSDictionary *)attribute andLinkHandler:(void(^)(FRHyperLabel *label, NSString *substring))handler {
+	NSRange range = [self.attributedText.string rangeOfString:substring];
+	if (range.length) {
+		[self setLinkForRange:range withAttributes:attribute andLinkHandler:^(FRHyperLabel *label, NSRange range){
+			handler(label, [label.attributedText.string substringWithRange:range]);
+		}];
+	}
+}
+
+- (void)setLinkForSubstring:(NSString *)substring withLinkHandler:(void(^)(FRHyperLabel *label, NSString *substring))handler {
+	[self setLinkForSubstring:substring withAttribute:self.linkAttributeDefault andLinkHandler:handler];
+}
+
+- (void)setLinksForSubstrings:(NSArray *)linkStrings withLinkHandler:(void(^)(FRHyperLabel *label, NSString *substring))handler {
+	for (NSString *linkString in linkStrings) {
+		[self setLinkForSubstring:linkString withLinkHandler:handler];
+	}
+}
+
+#pragma mark - Event Handler
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	self.backupAttributedText = self.attributedText;
@@ -79,7 +116,7 @@ static CGFloat highLightAnimationTime = 0.15;
 		if (rangeValue) {
 			NSRange range = [rangeValue rangeValue];
 			NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithAttributedString:self.attributedText];
-			[attributedString addAttributes:self.highlightLinkAttribute range:range];
+			[attributedString addAttributes:self.linkAttributeHighlight range:range];
 			
 			[UIView transitionWithView:self duration:highLightAnimationTime options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
 				self.attributedText = attributedString;
@@ -96,14 +133,16 @@ static CGFloat highLightAnimationTime = 0.15;
 	for (UITouch *touch in touches) {
 		NSValue *rangeValue = [self attributedTextRangeForPoint:[touch locationInView:self]];
 		if (rangeValue) {
-			void(^handler)(void) = self.handlerDictionary[rangeValue];
-			handler();
+			void(^handler)(FRHyperLabel *label, NSRange selectedRange) = self.handlerDictionary[rangeValue];
+			handler(self, [rangeValue rangeValue]);
 		}
 	}
 }
 
+#pragma mark - Substring Locator
+
 - (NSValue *)attributedTextRangeForPoint:(CGPoint)point {
-	NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
+	NSLayoutManager *layoutManager = [NSLayoutManager new];
 	NSTextContainer *textContainer = [[NSTextContainer alloc] initWithSize:CGSizeZero];
 	
 	textContainer.lineFragmentPadding = 0.0;

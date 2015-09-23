@@ -26,18 +26,13 @@
 	NSString *string = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis blandit eros, sit amet vehicula justo. Nam at urna neque. Maecenas ac sem eu sem porta dictum nec vel tellus.";
 	NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor blackColor],NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]};
 	
-	NSAttributedString *attributedString = [[NSAttributedString alloc]initWithString:string attributes:attributes];
+	label.attributedText = [[NSAttributedString alloc]initWithString:string attributes:attributes];
 	
-	label.attributedText = attributedString;
+	void(^handler)(FRHyperLabel *label, NSString *substring) = ^(FRHyperLabel *label, NSString *substring){
+		NSLog(@"Selected: %@", substring);
+	};
 	
-	NSArray *linkStrings = @[@"Lorem", @"Pellentesque", @"blandit", @"Maecenas"];
-	
-	for (NSString *linkString in linkStrings) {
-		NSRange range = [string rangeOfString:linkString];
-		[label setLinkForRange:range withLinkHandler:^{
-			NSLog(@"Selected: %@", linkString);
-		}];
-	}
+	[label setLinksForSubstrings:@[@"Lorem", @"Pellentesque", @"blandit", @"Maecenas"] withLinkHandler:handler];
 }
 
 - (void)didReceiveMemoryWarning {
