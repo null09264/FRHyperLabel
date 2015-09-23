@@ -2,6 +2,10 @@
 
 FRHyperLabel is a subclass of UILabel, which powers you the capablilty to add one or more hyperlinks to your label texts. With FRHyperLabel, You can define different style, handler and highlight appearance for difference hyperlinks in a super-easy way.
 
+
+![demo](https://cloud.githubusercontent.com/assets/4215068/10045372/cd468804-6234-11e5-80dd-46f02a758f53.gif)
+
+
 #### Usage
 The code to define a bunch of hyperlinks can be as short as one statement, just use the API: `setLinkForRange:withLinkHandler`, which takes in an substring range and a tap handler as input and setup the links with an element touch feedback.
 
