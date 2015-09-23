@@ -2,6 +2,11 @@
 
 FRHyperLabel is a subclass of UILabel, which powers you the capablilty to add one or more hyperlinks to your label texts. With FRHyperLabel, You can define different style, handler and highlight appearance for difference hyperlinks in a super-easy way.
 
+#####CocoaPods
+
+```
+pod 'FRHyperLabel'
+```
 
 ![demo](https://cloud.githubusercontent.com/assets/4215068/10045372/cd468804-6234-11e5-80dd-46f02a758f53.gif)
 
