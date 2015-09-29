@@ -79,3 +79,6 @@ Same as `setLinkForSubstring:withAttributes:andLinkHandler:`, expect this will f
 ```
 
 Add am array of links by giving an array of substrings. The selection handler has to the same for all links in the array, only first appreance will be take care.
+
+#### Known Issues
+Please refer to the [Known Issues](https://github.com/null09264/FRHyperLabel/wiki/Known-Issues) page in the wiki.
