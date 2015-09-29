@@ -16,11 +16,12 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FRHyperLabel"
-  s.version      = "0.0.1"
-  s.summary      = "A short description of FRHyperLabel."
+  s.version      = "1.0.0"
+  s.summary      = "FRHyperLabel is a subclass of UILabel, which powers you the capablilty to add one or more hyperlinks to your label texts"
 
   s.description  = <<-DESC
-                   A longer description of FRHyperLabel in Markdown format.
+                   FRHyperLabel is a subclass of UILabel, which powers you the capablilty to add one or more hyperlinks to your label texts. With FRHyperLabel, You can define different style, handler and highlight appearance for difference hyperlinks in a super-easy way.
+
 
                    * Think: Why did you write this? What is the focus? What does it do?
                    * CocoaPods will be using this to generate tags, and improve search results.
@@ -28,8 +29,8 @@ Pod::Spec.new do |s|
                    * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
 
-  s.homepage     = "http://EXAMPLE/FRHyperLabel"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+  s.homepage     = "https://github.com/null09264/FRHyperLabel"
+  # s.screenshots  = "https://cloud.githubusercontent.com/assets/4215068/10045372/cd468804-6234-11e5-80dd-46f02a758f53.gif"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -39,8 +40,7 @@ Pod::Spec.new do |s|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  s.license      = "MIT (example)"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  s.license      = { :type => "MIT", :file => "LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  # s.platform     = :ios
+  s.platform     = :ios
   # s.platform     = :ios, "5.0"
 
   #  When using multiple platforms
@@ -78,7 +78,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "http://EXAMPLE/FRHyperLabel.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/null09264/FRHyperLabel.git", :tag => "1.0.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -89,8 +89,8 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Classes", "Classes/**/*.{h,m}"
-  s.exclude_files = "Classes/Exclude"
+  s.source_files  = "FRHyperLabel", "FRHyperLabel/*"
+  s.exclude_files = ".gitignore", "FRHyperLabelDemo/*"
 
   # s.public_header_files = "Classes/**/*.h"
 
