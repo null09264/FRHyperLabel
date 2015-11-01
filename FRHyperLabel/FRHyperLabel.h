@@ -21,4 +21,6 @@
 
 - (void)setLinksForSubstrings:(NSArray *)substrings withLinkHandler:(void(^)(FRHyperLabel *label, NSString *substring))handler;
 
+- (void)clearActionDictionary;
+
 @end
