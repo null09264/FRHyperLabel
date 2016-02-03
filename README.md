@@ -11,7 +11,8 @@ pod 'FRHyperLabel'
 ![demo](https://cloud.githubusercontent.com/assets/4215068/10045372/cd468804-6234-11e5-80dd-46f02a758f53.gif)
 
 
-#### Usage (For Swift, please refer to the sample code FRHyperLabelDemoSwift)
+#### Usage 
+###### (For Swift, please refer to the sample code FRHyperLabelDemoSwift)
 The code to define a bunch of hyperlinks can be as short as one statement, just use the API: `setLinkForSubstring:withLinkHandler:`, which takes in an substring and a tap handler as input and setup the links with an element touch feedback.
 
 ##### Example:
