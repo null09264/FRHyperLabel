@@ -9,7 +9,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FRHyperLabelDemoSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRHyperLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDb-Tz-gpx" customClass="FRHyperLabel">
-                                <rect key="frame" x="246" y="289" width="109" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRHyperLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zby-oe-EbF" customClass="FRHyperLabel">
+                                <rect key="frame" x="246" y="289.5" width="108.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -27,14 +27,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wDb-Tz-gpx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="DzL-iQ-u4B"/>
-                            <constraint firstItem="wDb-Tz-gpx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="a9F-ia-wGl"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="wDb-Tz-gpx" secondAttribute="trailing" constant="15" id="kfL-qn-Xx7"/>
-                            <constraint firstItem="wDb-Tz-gpx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t51-Cj-qA1"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="zby-oe-EbF" secondAttribute="trailing" constant="15" id="LBF-cz-c0D"/>
+                            <constraint firstItem="zby-oe-EbF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OuD-6m-Mhe"/>
+                            <constraint firstItem="zby-oe-EbF" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Si0-Tf-pJL"/>
+                            <constraint firstItem="zby-oe-EbF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="XyW-jY-GPi"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="label" destination="wDb-Tz-gpx" id="0ey-gO-5kT"/>
+                        <outlet property="label" destination="zby-oe-EbF" id="n7a-AD-F1m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

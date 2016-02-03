@@ -13,7 +13,7 @@
 		264F6A6F1BB2BAC600F57563 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 264F6A6D1BB2BAC600F57563 /* Main.storyboard */; };
 		264F6A711BB2BAC600F57563 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 264F6A701BB2BAC600F57563 /* Assets.xcassets */; };
 		264F6A741BB2BAC600F57563 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 264F6A721BB2BAC600F57563 /* LaunchScreen.storyboard */; };
-		264F6A7D1BB2BB4C00F57563 /* FRHyperLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 264F6A7C1BB2BB4C00F57563 /* FRHyperLabel.m */; settings = {ASSET_TAGS = (); }; };
+		264F6A7D1BB2BB4C00F57563 /* FRHyperLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 264F6A7C1BB2BB4C00F57563 /* FRHyperLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +45,7 @@
 		264F6A581BB2BAC600F57563 = {
 			isa = PBXGroup;
 			children = (
+				264F6A7E1BB2BB5300F57563 /* FRHyperLabel */,
 				264F6A631BB2BAC600F57563 /* FRHyperLabelDemo */,
 				264F6A621BB2BAC600F57563 /* Products */,
 			);
@@ -61,7 +62,6 @@
 		264F6A631BB2BAC600F57563 /* FRHyperLabelDemo */ = {
 			isa = PBXGroup;
 			children = (
-				264F6A7E1BB2BB5300F57563 /* FRHyperLabel */,
 				264F6A671BB2BAC600F57563 /* AppDelegate.h */,
 				264F6A681BB2BAC600F57563 /* AppDelegate.m */,
 				264F6A6A1BB2BAC600F57563 /* ViewController.h */,
@@ -90,6 +90,7 @@
 				264F6A7C1BB2BB4C00F57563 /* FRHyperLabel.m */,
 			);
 			name = FRHyperLabel;
+			path = FRHyperLabelDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +317,7 @@
 				264F6A7A1BB2BAC600F57563 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
