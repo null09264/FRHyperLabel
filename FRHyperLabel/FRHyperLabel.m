@@ -129,6 +129,12 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 	}
 }
 
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+	[UIView transitionWithView:self duration:highLightAnimationTime options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+		self.attributedText = self.backupAttributedText;
+	} completion:nil];
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[UIView transitionWithView:self duration:highLightAnimationTime options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
 		self.attributedText = self.backupAttributedText;
