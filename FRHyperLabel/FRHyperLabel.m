@@ -135,6 +135,7 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 	[UIView transitionWithView:self duration:highLightAnimationTime options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
 		self.attributedText = self.backupAttributedText;
 	} completion:nil];
+	[super touchesCancelled:touches withEvent:event];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
