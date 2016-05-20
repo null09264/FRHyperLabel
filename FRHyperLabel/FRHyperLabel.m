@@ -145,7 +145,10 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 		if (rangeValue) {
 			void(^handler)(FRHyperLabel *label, NSRange selectedRange) = self.handlerDictionary[rangeValue];
 			handler(self, [rangeValue rangeValue]);
-		}
+        }
+        else if (self.outerRangeHandler) {
+            self.outerRangeHandler(self, [rangeValue rangeValue]);
+        }
 	}
 }
 
