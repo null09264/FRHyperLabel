@@ -21,17 +21,17 @@ class ViewController: UIViewController {
 		//Step 1: Define a normal attributed string for non-link texts
 		let string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis blandit eros, sit amet vehicula justo. Nam at urna neque. Maecenas ac sem eu sem porta dictum nec vel tellus."
 		
-		let attributes = [NSForegroundColorAttributeName: UIColor.blackColor(),
-			NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)]
+		let attributes = [NSForegroundColorAttributeName: UIColor.black,
+			NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
 		
 		label.attributedText = NSAttributedString(string: string, attributes: attributes)
 		
 		//Step 2: Define a selection handler block
 		let handler = {
-			(hyperLabel: FRHyperLabel!, substring: String!) -> Void in
-			let controller = UIAlertController(title: substring, message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-			controller.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-			self.presentViewController(controller, animated: true, completion: nil)
+			(hyperLabel: FRHyperLabel?, substring: String?) -> Void in
+			let controller = UIAlertController(title: substring, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+			controller.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+			self.present(controller, animated: true, completion: nil)
 		}
 		
 		//Step 3: Add link substrings
