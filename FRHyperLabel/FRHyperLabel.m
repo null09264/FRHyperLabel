@@ -127,14 +127,17 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 			[UIView transitionWithView:self duration:highLightAnimationTime options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
 				self.attributedText = attributedString;
 			} completion:nil];
+			return;
 		}
 	}
+	[super touchesBegan:touches withEvent:event];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 	[UIView transitionWithView:self duration:highLightAnimationTime options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
 		self.attributedText = self.backupAttributedText;
 	} completion:nil];
+	[super touchesCancelled:touches withEvent:event];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -147,8 +150,10 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 		if (rangeValue) {
 			void(^handler)(FRHyperLabel *label, NSRange selectedRange) = self.handlerDictionary[rangeValue];
 			handler(self, [rangeValue rangeValue]);
+			return;
 		}
 	}
+	[super touchesEnded:touches withEvent:event];
 }
 
 #pragma mark - Substring Locator
