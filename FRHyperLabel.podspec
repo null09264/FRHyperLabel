@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FRHyperLabel"
-  s.version      = "1.0.3"
+  s.version      = "1.0.4"
   s.summary      = "FRHyperLabel is a subclass of UILabel, which powers you the capablilty to add one or more hyperlinks to your label texts"
 
   s.description  = <<-DESC
@@ -53,10 +53,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Wang Jinghan" => "phantom.there@gmail.com" }
-  # Or just: s.author    = "Wang Jinghan"
-  # s.authors            = { "Wang Jinghan" => "phantom.there@gmail.com" }
-  # s.social_media_url   = "http://twitter.com/Wang Jinghan"
+  s.author             = { "Jinghan Wang" => "jinghan.w@icloud.com" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -78,7 +75,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/null09264/FRHyperLabel.git", :tag => "1.0.3" }
+  s.source       = { :git => "https://github.com/null09264/FRHyperLabel.git", :tag => "1.0.4" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
