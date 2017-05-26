@@ -246,7 +246,12 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 	CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(startIndex, 0), path, NULL);
 	
 	CFArrayRef lineArray = CTFrameGetLines(frame);
-	CFIndex j = 0, lineCount = CFArrayGetCount(lineArray);
+	CFIndex j = 0;
+	CFIndex lineCount = CFArrayGetCount(lineArray);
+	if (lineCount > self.numberOfLines && self.numberOfLines != 0) {
+		lineCount = self.numberOfLines;
+	}
+	
 	CGFloat h, ascent, descent, leading;
 	
 	for (j = 0; j < lineCount; j++) {
