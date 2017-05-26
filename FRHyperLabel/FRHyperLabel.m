@@ -158,22 +158,24 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 
 #pragma mark - Substring Locator
 
-- (NSValue *)attributedTextRangeForPoint:(CGPoint)point {
-
+- (NSInteger) characterIndexForPoint:(CGPoint) point {
 	CGRect boundingBox = [self attributedTextBoundingBox];
+	
 	CGMutablePathRef path = CGPathCreateMutable();
 	CGPathAddRect(path, NULL, boundingBox);
 	
 	CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attributedText);
 	CTFrameRef ctFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, self.attributedText.length), path, NULL);
 	
-	
-	CGPoint reversePoint = CGPointMake(point.x, CGRectGetHeight(self.frame) - point.y);
+	CGFloat verticalPadding = (CGRectGetHeight(self.frame) - CGRectGetHeight(boundingBox)) / 2;
+	CGFloat horizontalPadding = (CGRectGetWidth(self.frame) - CGRectGetWidth(boundingBox)) / 2;
+	CGFloat ctPointX = point.x - horizontalPadding;
+	CGFloat ctPointY = CGRectGetHeight(boundingBox) - (point.y - verticalPadding);
+	CGPoint ctPoint = CGPointMake(ctPointX, ctPointY);
 	
 	CFArrayRef lines = CTFrameGetLines(ctFrame);
 	
 	CGPoint* lineOrigins = malloc(sizeof(CGPoint)*CFArrayGetCount(lines));
-	
 	CTFrameGetLineOrigins(ctFrame, CFRangeMake(0,0), lineOrigins);
 	
 	NSInteger indexOfCharacter = -1;
@@ -185,8 +187,9 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 		CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
 		
 		CGPoint origin = lineOrigins[i];
-		if (reversePoint.y > origin.y - descent) {
-			indexOfCharacter = CTLineGetStringIndexForPosition(line, reversePoint);
+		
+		if (ctPoint.y > origin.y - descent) {
+			indexOfCharacter = CTLineGetStringIndexForPosition(line, ctPoint);
 			break;
 		}
 	}
@@ -195,6 +198,13 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 	CFRelease(ctFrame);
 	CFRelease(path);
 	CFRelease(framesetter);
+	
+	return indexOfCharacter;
+}
+
+- (NSValue *)attributedTextRangeForPoint:(CGPoint)point {
+
+	NSInteger indexOfCharacter = [self characterIndexForPoint:point];
 	
 	for (NSValue *rangeValue in self.handlerDictionary) {
 		NSRange range = [rangeValue rangeValue];
@@ -243,7 +253,7 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 		CTLineRef currentLine = (CTLineRef)CFArrayGetValueAtIndex(lineArray, j);
 		CTLineGetTypographicBounds(currentLine, &ascent, &descent, &leading);
 		h = ascent + descent + leading;
-		H+=h;
+		H += h;
 	}
 	
 	CFRelease(frame);
