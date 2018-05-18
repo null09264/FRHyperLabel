@@ -68,6 +68,18 @@ static UIColor *FRHyperLabelLinkColorHighlight;
 	}
 }
 
+#pragma mark - override
+
+- (void)setAttributedText:(NSAttributedString *)attributedText {
+    _boundingBox = CGRectZero;
+    [super setAttributedText:attributedText];
+}
+
+- (void)setText:(NSString *)text {
+    _boundingBox = CGRectZero;
+    [super setText:text];
+}
+
 #pragma mark - APIs
 
 - (void)clearActionDictionary {
